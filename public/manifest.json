@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Find Computer",
+  "name": "Online store for selling computers",
   "icons": [
     {
       "src": "favicon.ico",
