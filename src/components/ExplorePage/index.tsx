@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => createStyles({
   }
 }))
 
-export default function DashboardPage(){
+export default function ExplorePage(){
   const classes = useStyles()
   return <Grid container justify="center">
     <Grid item xs={12}>

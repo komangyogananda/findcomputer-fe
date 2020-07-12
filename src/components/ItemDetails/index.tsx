@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid, Box, Typography, makeStyles, createStyles, Paper, Theme, Avatar, Button } from '@material-ui/core';
 import Navbar from '../Navbar';
 
+const Carousel = require('react-material-ui-carousel').default
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
   margin: {
     marginBottom: "3rem",
@@ -18,6 +20,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   avatar: {
     width: "64px",
     height: "64px"
+  },
+  image: {
+    width: "80%",
+    marginBottom: "1rem",
+    objectFit: "cover"
   }
 }))
 
@@ -27,8 +34,19 @@ export default function ItemDetails(){
     <Grid item xs={12} className={classes.margin}>
       <Navbar></Navbar>
     </Grid>
-    <Grid item xs={10} md={5} className={classes.margin}>
-      <h3>ImageHere</h3>
+    <Grid item xs={10} md={5} className={`${classes.margin} ${classes.paper}`}>
+        <Carousel navButtonsAlwaysVisible={true}>
+          <div>
+              <img className={classes.image} src="https://via.placeholder.com/600" key="1" alt="item" />
+              <Typography>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat optio doloribus id modi totam atque, at nobis fuga architecto accusantium alias excepturi perferendis molestias eius! Eligendi, incidunt natus. Aliquid, animi!
+              </Typography>
+          </div>
+          <div>
+              <img className={classes.image} src="https://via.placeholder.com/600" key="2" alt="item" />
+              <p>Legend 2</p>
+          </div>
+        </Carousel>
     </Grid>
     <Grid item xs={10} md={5} className={classes.margin}>
       <Paper variant="outlined" className={classes.paper}>

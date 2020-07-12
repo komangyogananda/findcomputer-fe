@@ -18,13 +18,13 @@ const useStyles = makeStyles(() => createStyles({
   }
 }))
 
-export default function DashboardPage(){
+export default function AccountPage(){
   const classes = useStyles()
   return <Grid container justify="center">
     <Grid item xs={12}>
       <Navbar></Navbar>
     </Grid>
-    <Grid item xs={12} md={12}>
+    <Grid item xs={12} md={12} style={{marginBottom: '2rem'}}>
       <Grid container direction="row" justify="center">
         <Grid item xs={12} md={8} className={classes.pad}>
           <Grid container direction="row" spacing={2}>

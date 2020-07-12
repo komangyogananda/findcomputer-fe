@@ -6,6 +6,7 @@ import Login from '../Login';
 import SignUp from '../SignUp';
 import { COLORS } from '../constants';
 import PromotionInfo from '../PromotionInfo';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -34,6 +35,7 @@ export default function HomePage() {
   const classes = useStyles();
   const [joinMethod, setJoinMethod] = useState(true);
   const [showPromotion, setShowPromotion] = useState(true)
+  const history = useHistory()
 
   return <Grid container alignItems="center" justify="center" direction="row">
     <Grid 
@@ -67,6 +69,11 @@ export default function HomePage() {
               setJoinMethod(false)
             }}>
             <h3>SignUp</h3>
+          </Grid>
+          <Grid item className={classes.navbar} onClick={() => {
+              history.push('/explore')
+            }}>
+            <h3>Explore</h3>
           </Grid>
         </Grid>
         <Grid item xs={10} md={8}>
