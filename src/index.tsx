@@ -13,7 +13,7 @@ let theme = createMuiTheme({
       main: COLORS.PrimaryMain,
       light: COLORS.PrimaryLight,
       dark: COLORS.PrimaryDark,
-      contrastText: "#fff"
+      contrastText: "#fff "
     }
   },
   typography: {

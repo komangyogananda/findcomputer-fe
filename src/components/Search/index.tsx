@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid, makeStyles, createStyles, InputBase, Theme, fade, Button } from '@material-ui/core'
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -19,16 +19,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     padding: theme.spacing(1, 1, 1, 0),
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '16ch',
-      '&:focus': {
-        width: '30ch',
-      },
-    },
   },
 }))
 
-export default function SearchAndFilter(){
+type ISearchProps = {
+  onSearch: (qs: String) => void,
+  initialSearch: string,
+}
+
+export default function Search({onSearch, initialSearch}: ISearchProps){
+  const [query, setQuery] = useState<String>(initialSearch)
   const classes = useStyles()
   return <Grid container direction="column" className={classes.root}>
     <Grid item className={classes.searchBar}>
@@ -40,11 +40,19 @@ export default function SearchAndFilter(){
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
+            value={query}
             inputProps={{ 'aria-label': 'search' }}
+            onChange={(event) => {
+              setQuery(event.target.value)
+            }}
           />
         </Grid>
         <Grid item>
-          <Button color="primary" disableRipple>Search</Button>
+          <Button color="primary" disableRipple onClick={
+            () => {
+              onSearch(query)
+            }
+          }>Search</Button>
         </Grid>
       </Grid>
     </Grid>

@@ -2,6 +2,8 @@ import React from 'react';
 import { AppBar, Typography, Grid, Box } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { COLORS } from '../constants';
+import StateContainer from '../../store';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => createStyles({
   root: {
@@ -19,6 +21,39 @@ const useStyles = makeStyles(() => createStyles({
 
 export default function Navbar() {
   const classes = useStyles()
+  const { loggedIn, logout } = StateContainer.useContainer()
+  const history = useHistory()
+  let profileSection;
+  if (loggedIn){
+    profileSection = [
+      <Grid item className={classes.navitem} onClick={() => history.push('/account/me')}>
+        <Typography>
+          profile
+        </Typography>
+      </Grid>,
+      <Grid item className={classes.navitem} onClick={() => {
+        logout()
+        history.push('/')
+      }}>
+        <Typography>
+          log out
+        </Typography>
+      </Grid>,
+    ]
+  }else{
+    profileSection = [
+      <Grid item className={classes.navitem} onClick={() => history.push('/')}>
+        <Typography>
+          login
+        </Typography>
+      </Grid>,
+      <Grid item className={classes.navitem} onClick={() => history.push('/')}>
+        <Typography>
+          signup
+        </Typography>
+    </Grid>
+    ]
+  }
   return <AppBar className={classes.root} position="sticky">
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={4}>
@@ -32,16 +67,12 @@ export default function Navbar() {
         </Grid>
         <Grid item xs={8}>
           <Grid container direction="row" justify="flex-end" spacing={4}>
-            <Grid item className={classes.navitem}>
+            <Grid item className={classes.navitem} onClick={() => history.push('/explore')}>
               <Typography>
                 home
               </Typography>
             </Grid>
-            <Grid item className={classes.navitem}>
-              <Typography>
-                profile
-              </Typography>
-            </Grid>
+            {profileSection}
           </Grid>
         </Grid>
       </Grid>
