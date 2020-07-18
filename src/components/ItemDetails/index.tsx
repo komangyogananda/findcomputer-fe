@@ -73,11 +73,11 @@ export default function ItemDetails(){
   const handleActionDialog = () => {
     if (onDelete){
       deleteItem(item?.id || 0)
-        .then(response => {
+        .then(() => {
           history.push('/explore')
         })
-        .catch(error => {
-
+        .catch(() => {
+          
         })
     }else if (onBuy){
       buyItem(item?.id || 0)
@@ -97,6 +97,7 @@ export default function ItemDetails(){
       .catch(() => {
         history.push('/404')
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
   return (loading || item == null) ? <LoadingPage></LoadingPage> : <Grid container direction="row" justify="center">
     <Grid item xs={12} className={classes.margin}>
@@ -254,11 +255,12 @@ export default function ItemDetails(){
                 </Grid>
                 {loggedIn ? <Grid item>
                   <Grid container justify="flex-end" spacing={2}>
-                    {username != item?.username && <Grid item>
+                    {username !== item?.username && <Grid item>
                       <Button 
                         color="primary" 
                         variant="contained"
                         onClick={() => setOnBuy(true)}
+                        disabled={isSubmitting}
                       >
                         Buy
                       </Button>
@@ -269,6 +271,7 @@ export default function ItemDetails(){
                         color="primary" 
                         variant="contained"
                         onClick={() => setOnEdit(true)}
+                        disabled={isSubmitting}
                       >
                         Edit
                       </Button>}
@@ -279,6 +282,7 @@ export default function ItemDetails(){
                         color="secondary" 
                         variant="contained"
                         onClick={() => setOnDelete(true)}
+                        disabled={isSubmitting}
                       >
                         Delete
                       </Button>}

@@ -60,6 +60,7 @@ export default function ExplorePage(){
       .catch(error => {
         console.log("[DEBUG]: ExplorePage -> error", error)
       })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   const searchCallback = (qs: String) => {

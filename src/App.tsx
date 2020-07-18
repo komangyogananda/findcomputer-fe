@@ -28,7 +28,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response == undefined || error.response.status === 503){
+    if (error.response === undefined || error.response.status === 503){
       window.location.href = '/500'
     }
     return Promise.reject(error)
