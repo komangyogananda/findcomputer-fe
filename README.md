@@ -1,44 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Daftar isi
+- [Daftar isi](#daftar-isi)
+- [Find Computer FrontEnd](#find-computer-frontend)
+  - [Deskripsi](#deskripsi)
+  - [Route](#route)
+- [Local Deployment](#local-deployment)
+  - [Environtment](#environtment)
+  - [Environtment variable](#environtment-variable)
+- [Run](#run)
+  
+# Find Computer FrontEnd
 
-## Available Scripts
+## Deskripsi
+Find Computer frontend dikerjakan dengan menggunakan library ReactJS dengan menggunakan Typescript. Frontend menggunakan authentikasi JWT untuk setiap requestnya (terutama request yang memerlukan authentikasi). JWT Token disimpan didalam localstorage sehingga user tidak perlu login setiap refresh page.
 
-In the project directory, you can run:
+## Route
+Halaman yang tersedia pada front end adalah  
+1. /  
+   Halaman landing page, login dan signup.  
+   ![image](images/1.png)
+2. /explore  
+   Halaman yang menampilkan semua produk yang ada.  
+   ![image](images/2.png)
+3. /account/me  
+   Halaman yang menampilkanm dan mengedit informasi dirinya  
+   ![image](images/3.png)
+4. /account/:username  
+   Halaman yang menampilkan informasi pengguna dan itemnya  
+   ![image](images/4.png)
+5. /item/details/:id  
+   Halaman yang menampilkan informasi detail barang dan aksi yang dilakukan (beli, edit, hapus)  
+   ![image](images/5.png)
+6. /item/add  
+   Halaman untuk menambahkan item baru  
+   ![image](images/6.png)
 
-### `yarn start`
+# Local Deployment
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  ## Environtment
+  - Proyek ini menggunakan yarn package manager. Install apabila belum memiliki yarn package manager sesuai instruksi [ini](https://yarnpkg.com/getting-started/install)
+  - Jalankan perintah
+    ```bash
+    yarn install
+    ```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  ## Environtment variable
+  - Buka .env.development
+  - Ubahlah ```REACT_APP_BASE_URL=http://localhost:5000``` sesuai dengan alamat dari module backend
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Run
+Jalankan project dengan perintah
+```bash
+yarn start
+```
