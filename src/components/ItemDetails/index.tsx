@@ -12,6 +12,18 @@ import * as Yup from 'yup'
 
 const Carousel = require('react-material-ui-carousel').default
 
+interface IImageRequest {
+  base64: string;
+  filename: string;
+}
+interface IItemRequest {
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  images: IImageRequest;
+}
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
   margin: {
     marginBottom: "3rem",
@@ -41,7 +53,13 @@ interface IItems {
   title: string;
   description: string;
   category: string;
-  price: number
+  price: number;
+  images: string[];
+}
+
+interface IImageProps {
+  src: string;
+  item: IItems;
 }
 
 const EditItemSchema = Yup.object().shape({
@@ -99,23 +117,22 @@ export default function ItemDetails(){
       })
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
+
+  const Image = React.memo(({src, item}: IImageProps) => (<div>
+    <img className={classes.image} src={src} key={item.username} alt={item.username} />
+  </div>))
+  
   return (loading || item == null) ? <LoadingPage></LoadingPage> : <Grid container direction="row" justify="center">
     <Grid item xs={12} className={classes.margin}>
       <Navbar></Navbar>
     </Grid>
     <Grid item xs={10} md={5} className={`${classes.margin} ${classes.paper}`}>
-        <Carousel navButtonsAlwaysVisible={true}>
-          <div>
-              <img className={classes.image} src="https://via.placeholder.com/600" key="1" alt="item" />
-              <Typography>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat optio doloribus id modi totam atque, at nobis fuga architecto accusantium alias excepturi perferendis molestias eius! Eligendi, incidunt natus. Aliquid, animi!
-              </Typography>
-          </div>
-          <div>
-              <img className={classes.image} src="https://via.placeholder.com/600" key="2" alt="item" />
-              <p>Legend 2</p>
-          </div>
-        </Carousel>
+        {item.images.length > 1 && <Carousel navButtonsAlwaysVisible={true}>
+          {item.images.map((url, idx) => <Image src={url} item={item}></Image>
+          )}
+        </Carousel>}
+        {item.images.length === 1 && <Image src={item.images[0]} item={item}></Image>}
+        {item.images.length === 0 && <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQQBY-YZl7MNp5apNCutue3ZJl0jGPT1wZyJQ&usqp=CAU" item={item}></Image>}
     </Grid>
     <Grid item xs={10} md={5} className={classes.margin}>
       <Formik

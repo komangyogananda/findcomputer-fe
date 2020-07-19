@@ -82,11 +82,16 @@ export const getItem = (id: number) => {
   return Axios.get(url)
 }
 
-type IItemRequest = {
-  title: string,
-  price: number,
-  description: string,
-  category: string,
+interface IImageRequest {
+  base64: string;
+  filename: string;
+}
+interface IItemRequest {
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  images?: IImageRequest[];
 }
 
 export const editItem = (itemRequest: IItemRequest, id: number) => {

@@ -32,16 +32,21 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   }
 }))
 
+interface IImageRequest {
+  base64: string;
+  filename: string;
+}
+
 const NewItemValidationSchema = Yup.object().shape({
   title: Yup.string().min(4, 'Too Short').max(255, 'Too long').required("Required"),
   price: Yup.number().positive().required("Required"),
   category: Yup.string().oneOf(["ram", "storage", "vga", "motherboard", "processor"]),
-  description: Yup.string().min(4, 'Too Short').required("Required"),
+  description: Yup.string().min(4, 'Too Short').max(255, "Too Long").required("Required"),
 })
 
 export default function AddItemPage() {
 
-  const [images, setImages] = useState<any[]>([])
+  const [images, setImages] = useState<IImageRequest[]>([])
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false)
   const [error, setError] = useState<String>("")
   const history = useHistory()
@@ -56,8 +61,13 @@ export default function AddItemPage() {
   }
 
   const handleSuccess = (files: any) => {
-    console.log("[DEBUG]: handleSuccess -> files", files)
-    setImages([...images, ...files])
+    let newImages: IImageRequest[] = files.map((file: any) => {
+      return {
+        'base64': file.src.base64,
+        'filename': file.name 
+      }
+    })
+    setImages([...images, ...newImages])
   }
   
   const removeImage = (index: number) => {
@@ -91,7 +101,10 @@ export default function AddItemPage() {
             }}
             validationSchema={NewItemValidationSchema}
             onSubmit={(values, {setSubmitting}) => {
-              addItem(values)
+              addItem({
+                ...values,
+                images: images
+              })
                 .then((response) => {
                   history.push('/account/me')
                 })
@@ -184,7 +197,7 @@ export default function AddItemPage() {
                       <Grid container spacing={2}>
                         { images.map((image, index) => <Grid item>
                           <Paper variant="outlined" key={`uploaded-${index}`} className={classes.image} onClick={() => removeImage(index)}>
-                            <img src={image.src.base64} className={classes.image} alt="item"/>
+                            <img src={image.base64} className={classes.image} alt="item"/>
                           </Paper>
                         </Grid>)}
                         { images.length < 4 && <Grid item>

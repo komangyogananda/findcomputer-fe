@@ -14,22 +14,23 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }))
 
 type itemCardProps = {
-  title: String,
+  title: string,
   price: Number,
   category: String,
-  owner: String
+  owner: String,
+  image: string
 }
 
-export default function ItemCard({title, price, category, owner}: itemCardProps){
+export default function ItemCard({title, price, category, owner, image}: itemCardProps){
   const classes = useStyles()
   return <Card variant="elevation" className={classes.card} raised={false}>
     <CardActionArea className={classes.root}>
       <CardMedia
         component="img"
-        alt="Oi"
+        alt={title}
         height="200"
-        image="https://via.placeholder.com/250"
-        title="Item"
+        image={image || "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQQBY-YZl7MNp5apNCutue3ZJl0jGPT1wZyJQ&usqp=CAU"}
+        title={title}
       />
       <CardContent>
         <Grid direction="column">

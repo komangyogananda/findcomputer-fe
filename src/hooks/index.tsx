@@ -6,7 +6,8 @@ interface IItems {
   title: string;
   description: string;
   category: string;
-  price: number
+  price: number,
+  images: string[]
 }
 
 export const useItemsPagination = () => {

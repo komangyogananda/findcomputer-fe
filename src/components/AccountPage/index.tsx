@@ -154,7 +154,7 @@ export default function AccountPage(){
                     <Grid item onClick={() => {
                       history.push(`/item/details/${item.id}`)
                     }}>
-                      <ItemCard title={item.title} price={item.price} category={item.category} owner={item.username}></ItemCard>
+                      <ItemCard title={item.title} price={item.price} category={item.category} owner={item.username} image={item.images[0]}></ItemCard>
                     </Grid>
                   ))}
               </Grid>}
