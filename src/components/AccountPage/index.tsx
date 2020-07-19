@@ -46,7 +46,6 @@ export default function AccountPage(){
   const {items, loading, page, pageMax, notFound, setFromApi, setLoading} = useItemsPagination()
   const {username: authUsername} = StateContainer.useContainer()
   const queryUsername = username === "me" ? authUsername : username
-  console.log("[DEBUG]: AccountPage -> loading", loading)
 
   useEffect(() => {
     const userProfilePromise = getUserProfile(username)
@@ -54,7 +53,6 @@ export default function AccountPage(){
     setLoading(true)
     Promise.all([userProfilePromise, itemPromise])
       .then(result => {
-        console.log("[DEBUG]: AccountPage -> result", result)
         const [userResponse, itemsResponse] = result
         setUserProfile(userResponse.data)
         setFromApi(itemsResponse.data)
@@ -67,12 +65,10 @@ export default function AccountPage(){
 
 
   const searchCallback = (qs: String) => {
-    console.log("[DEBUG]: searchCallback -> qs", qs)
     history.push(pathname + "?" + queryString.stringify({...params, query: qs}))
   }
 
   const filterCallback = (selected: String[]) => {
-    console.log("[DEBUG]: filterCallback -> selected", selected)
     history.push(pathname + "?" + queryString.stringify({...params, category: selected}))
   }
 

@@ -4,7 +4,6 @@ import queryString from 'query-string';
 
 export const postLogin = (username: String, password: String) => {
   const url = getApiUrl('/auth/signin')
-  console.log("[DEBUG]: postLogin -> url", url)
   return Axios.post(url, {
       username,
       password
@@ -73,7 +72,6 @@ export const getItems = (query: Partial<QuerySearch>) => {
     url: baseurl,
     query
   })
-  console.log("[DEBUG]: getItems -> url", url)
   return Axios.get(url)
 }
 

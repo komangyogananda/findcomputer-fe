@@ -71,7 +71,6 @@ export default function AddItemPage() {
   }
   
   const removeImage = (index: number) => {
-    console.log("[DEBUG]: removeImage -> index", index)
     let newImages = [...images]
     newImages.splice(index, 1)
     setImages(newImages)

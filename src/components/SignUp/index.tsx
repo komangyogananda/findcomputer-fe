@@ -58,7 +58,6 @@ export default function SignUp(){
             resetForm()
           })
           .catch(error => {
-            console.log("[DEBUG]: SignUp -> error", error.response)
             setErrorMessage(error.response.data.message || "Something went wrong")
           })
           .finally(() => {

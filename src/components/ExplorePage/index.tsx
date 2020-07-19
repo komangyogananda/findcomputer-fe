@@ -28,7 +28,6 @@ export default function ExplorePage(){
   const classes = useStyles()
   const { pathname, search } = useLocation()
   const params = queryString.parse(search)
-  console.log("[DEBUG]: ExplorePage -> params", params)
   const history = useHistory()
   const getCategory = () => {
     let ret: any = {
@@ -59,18 +58,15 @@ export default function ExplorePage(){
         setFromApi(response.data)
       })
       .catch(error => {
-        console.log("[DEBUG]: ExplorePage -> error", error)
       })
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   const searchCallback = (qs: String) => {
-    console.log("[DEBUG]: searchCallback -> qs", qs)
     history.push(pathname + "?" + queryString.stringify({...params, query: qs}))
   }
 
   const filterCallback = (selected: String[]) => {
-    console.log("[DEBUG]: filterCallback -> selected", selected)
     history.push(pathname + "?" + queryString.stringify({...params, category: selected}))
   }
 

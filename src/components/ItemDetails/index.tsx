@@ -100,7 +100,6 @@ export default function ItemDetails(){
     }else if (onBuy){
       buyItem(item?.id || 0)
         .then(response => {
-          console.log("[DEBUG]: handleActionDialog -> response", response)
           history.push('/explore')
         })
     }
@@ -150,7 +149,6 @@ export default function ItemDetails(){
                 ...item,
                 ...values
               })
-              console.log("[DEBUG]: ItemDetails -> response", response)
             })
             .catch(error => {
 

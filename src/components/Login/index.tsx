@@ -60,7 +60,6 @@ export default function Login(){
             }
           })
           .catch((error) => {
-            console.log("[DEBUG]: Login -> error", error.response)
             setOpenSnackbar(true)
             setErrorPost(error.response.data.message)
           })
