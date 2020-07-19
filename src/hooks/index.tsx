@@ -36,6 +36,7 @@ export const useItemsPagination = () => {
     page,
     pageMax,
     notFound,
-    setFromApi
+    setFromApi,
+    setLoading
   }
 }

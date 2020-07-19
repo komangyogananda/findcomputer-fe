@@ -25,9 +25,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 type ISearchProps = {
   onSearch: (qs: String) => void,
   initialSearch: string,
+  loading?: boolean,
 }
 
-export default function Search({onSearch, initialSearch}: ISearchProps){
+export default function Search({onSearch, initialSearch, loading = false}: ISearchProps){
   const [query, setQuery] = useState<String>(initialSearch)
   const classes = useStyles()
   return <Grid container direction="column" className={classes.root}>
@@ -45,10 +46,11 @@ export default function Search({onSearch, initialSearch}: ISearchProps){
             onChange={(event) => {
               setQuery(event.target.value)
             }}
+            disabled={loading}
           />
         </Grid>
         <Grid item>
-          <Button color="primary" disableRipple onClick={
+          <Button color="primary" disabled={loading} disableRipple onClick={
             () => {
               onSearch(query)
             }

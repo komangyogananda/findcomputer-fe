@@ -56,7 +56,7 @@ export default function Navbar() {
   }
   return <AppBar className={classes.root} position="sticky">
       <Grid container direction="row" justify="center" alignItems="center">
-        <Grid item xs={4}>
+        <Grid item xs={4} style={{cursor: "pointer"}} onClick={() => history.push('/explore')}>
           <Grid container direction="row" justify="flex-start">
             <Typography>
               <Box fontWeight="fontWeightBold">

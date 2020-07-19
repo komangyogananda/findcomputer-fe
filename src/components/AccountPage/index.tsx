@@ -43,7 +43,7 @@ export default function AccountPage(){
   const history = useHistory()
   const { pathname, search } = useLocation()
   const params = queryString.parse(search)
-  const {items, loading, page, pageMax, notFound, setFromApi} = useItemsPagination()
+  const {items, loading, page, pageMax, notFound, setFromApi, setLoading} = useItemsPagination()
   const {username: authUsername} = StateContainer.useContainer()
   const queryUsername = username === "me" ? authUsername : username
   console.log("[DEBUG]: AccountPage -> loading", loading)
@@ -51,6 +51,7 @@ export default function AccountPage(){
   useEffect(() => {
     const userProfilePromise = getUserProfile(username)
     const itemPromise = getItems({...params, username: queryUsername})
+    setLoading(true)
     Promise.all([userProfilePromise, itemPromise])
       .then(result => {
         console.log("[DEBUG]: AccountPage -> result", result)
@@ -128,7 +129,7 @@ export default function AccountPage(){
                           Search
                         </Box>
                       </Typography>
-                      <Search initialSearch={params.query as string|| ""} onSearch={searchCallback}></Search>
+                      <Search loading={loading} initialSearch={params.query as string|| ""} onSearch={searchCallback}></Search>
                     </Grid>
                     <Grid item>
                       <Typography variant="h4" className={classes.pad}>
@@ -136,7 +137,7 @@ export default function AccountPage(){
                           Filter
                         </Box>
                       </Typography>
-                      <Filter onChange={filterCallback} initialState={getCategory()}></Filter>
+                      <Filter loading={loading} onChange={filterCallback} initialState={getCategory()}></Filter>
                     </Grid>
                 </Grid>
               </Paper>
@@ -159,11 +160,11 @@ export default function AccountPage(){
                   ))}
               </Grid>}
             </Grid>
-            <Grid item>
+            {!notFound && <Grid item>
               <Box margin={4}>
                 <Pagination count={pageMax} color="primary" onChange={onChangePagination} page={Number(page || 1)}/>
               </Box>
-            </Grid>
+            </Grid>}
           </Grid>
         </Grid>
       </Grid>

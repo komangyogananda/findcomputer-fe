@@ -51,8 +51,9 @@ export default function ExplorePage(){
     }
     return ret
   }
-  const {items, loading, page, pageMax, notFound, setFromApi} = useItemsPagination()
+  const {items, loading, page, pageMax, notFound, setFromApi, setLoading} = useItemsPagination()
   useEffect(() => {
+    setLoading(true);
     getItems(params)
       .then(response => {
         setFromApi(response.data)
@@ -107,10 +108,10 @@ export default function ExplorePage(){
         </Grid>
         <Grid item xs={12} md={9}>
           {notFound ? <SearchNotFound /> : <React.Fragment>
-            <Grid container direction="column" alignItems="center" spacing={4}>
+            <Grid container direction="column" alignItems="center">
               <Grid item>
                 <Typography variant="h3">
-                  <Box marginTop={4}>
+                  <Box marginTop={4} marginBottom={4}>
                     Result
                   </Box>
                 </Typography>
@@ -127,7 +128,9 @@ export default function ExplorePage(){
                 </Grid>
               </Grid>
               <Grid item>
-                <Pagination count={pageMax} color="primary" onChange={onChangePagination} page={Number(page || 1)}/>
+                <Box marginTop={4}>
+                  <Pagination count={pageMax} color="primary" onChange={onChangePagination} page={Number(page || 1)}/>
+                </Box>
               </Grid>
             </Grid>
           </React.Fragment>}

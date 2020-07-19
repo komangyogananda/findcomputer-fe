@@ -6,14 +6,22 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     height: "100vh",
     width: "100vw"
   },
+  wide: {
+    height: "100%",
+    width: "100%"
+  },
   primary: {
     color: theme.palette.primary.main
   }
 }))
 
-const LoadingPage = () => {
+interface ILoadingPageProps {
+  inside?: boolean;
+}
+
+const LoadingPage = ({inside = false}: ILoadingPageProps) => {
   const classes = useStyles()
-  return <Grid container direction="column" className={classes.root} justify="center" alignItems="center">
+  return <Grid container direction="column" className={inside ? classes.wide : classes.root} justify="center" alignItems="center">
     <Grid item>
       <CircularProgress color="primary" />
     </Grid>

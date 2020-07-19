@@ -179,6 +179,9 @@ export default function AddItemPage() {
                     <Button color="primary" disableRipple={true} disableFocusRipple={true} disableTouchRipple={true}>
                       500KB max each
                     </Button>
+                    <Button color="primary" disableRipple={true} disableFocusRipple={true} disableTouchRipple={true}>
+                      Images cannot edited after
+                    </Button>
                     <Button color="secondary" disableRipple={true} disableFocusRipple={true} disableTouchRipple={true}>
                       Click to remove
                     </Button>

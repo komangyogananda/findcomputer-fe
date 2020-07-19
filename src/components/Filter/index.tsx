@@ -18,10 +18,11 @@ type FilterState = {
 
 type FilterProps = {
   onChange: (selected: String[]) => void,
-  initialState: FilterState
+  initialState: FilterState,
+  loading?: boolean,
 }
 
-export default function Filter({onChange, initialState}: FilterProps){
+export default function Filter({onChange, initialState, loading =false}: FilterProps){
   const classes = useStyles()
   const [filter, setFilter] = useState<FilterState>(initialState)
 
@@ -56,7 +57,7 @@ export default function Filter({onChange, initialState}: FilterProps){
         control={
           <Checkbox
             checked={!filter.all && filter.ram}
-            disabled={filter.all}
+            disabled={filter.all || loading}
             onChange={handleChange}
             name="ram"
             color="primary"
@@ -80,7 +81,7 @@ export default function Filter({onChange, initialState}: FilterProps){
         control={
           <Checkbox
             checked={!filter.all && filter.vga}
-            disabled={filter.all}
+            disabled={filter.all || loading}
             onChange={handleChange}
             name="vga"
             color="primary"
@@ -92,7 +93,7 @@ export default function Filter({onChange, initialState}: FilterProps){
         control={
           <Checkbox
             checked={!filter.all && filter.motherboard}
-            disabled={filter.all}
+            disabled={filter.all || loading}
             onChange={handleChange}
             name="motherboard"
             color="primary"
@@ -104,7 +105,7 @@ export default function Filter({onChange, initialState}: FilterProps){
         control={
           <Checkbox
             checked={!filter.all && filter.storage}
-            disabled={filter.all}
+            disabled={filter.all || loading}
             onChange={handleChange}
             name="storage"
             color="primary"
@@ -116,6 +117,7 @@ export default function Filter({onChange, initialState}: FilterProps){
         control={
           <Checkbox
             checked={filter.all}
+            disabled={loading}
             onChange={handleChange}
             name="all"
             color="primary"
